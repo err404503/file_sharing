@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .login-container { width: 300px; padding: 20px; border: 1px solid #ccc; border-radius: 5px; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        {% with messages %}
+        {% for message in get_flashed_messages() %}
+            <p class="error">{{ message }}</p>
+        {% endfor %}
+        {% endwith %}
+        <form method="post">
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username" required placeholder="Enter your username"><br><br>
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password" required placeholder="Enter your password"><br><br>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+</body>
+</html>

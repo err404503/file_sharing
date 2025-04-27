@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Sharing</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .file-list { margin-top: 20px; }
+        .message { color: green; }
+    </style>
+</head>
+<body>
+    <h2>File Sharing Platform</h2>
+    <p><a href="{{ url_for('logout') }}">Logout</a></p>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p class="message">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <form method="post" enctype="multipart/form-data">
+        <!-- 添加 label 标签并与 input 关联 -->
+        <label for="file-upload">Select a file to upload:</label>
+        <input type="file" id="file-upload" name="file" required title="Choose a file to upload">
+        <input type="submit" value="Upload" formaction="{{ url_for('upload_file') }}">
+    </form>
+    <div class="file-list">
+        <h3>Uploaded Files:</h3>
+        <ul>
+        {% for file in files %}
+            <li><a href="{{ url_for('download_file', filename=file) }}">{{ file }}</a></li>
+        {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
