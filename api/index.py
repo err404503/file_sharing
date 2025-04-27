@@ -4,7 +4,7 @@ import sqlite3
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
-app.secret_key = os.environ.get('SECRET_KEY', 'your_secret_key')  # 从环境变量获取密钥
+app.secret_key = os.environ.get('SECRET_KEY', 'your_secret_key')
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -90,7 +90,7 @@ def logout():
     session.pop('username', None)
     return redirect(url_for('login'))
 
+# Vercel需要导出一个WSGI应用
 if __name__ == '__main__':
     init_db()
-    port = int(os.environ.get('PORT', 5000))  # Render使用PORT环境变量
-    app.run(host='0.0.0.0', port=port, debug=False)
+    app.run(debug=True)
